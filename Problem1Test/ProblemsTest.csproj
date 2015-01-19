@@ -52,15 +52,16 @@
   <ItemGroup>
     <Compile Include="Problem1Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Problem2Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{8ABAC714-37CD-4192-AA4F-8BF0C05A07A7}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Problem1\Problem1.csproj">
+    <ProjectReference Include="..\Problem1\Problems.csproj">
       <Project>{45511B42-4C7E-4E2E-81B2-BB6A205B083D}</Project>
-      <Name>Problem1</Name>
+      <Name>Problems</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

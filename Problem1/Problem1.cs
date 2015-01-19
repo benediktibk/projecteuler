@@ -1,7 +1,7 @@
 ﻿using System;
 using Common;
 
-namespace Problem1
+namespace Problems
 {
     public class Problem1 : IProblem
     {

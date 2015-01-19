@@ -1,5 +1,6 @@
 ﻿using System;
 using Common;
+using Problems;
 
 namespace ProjectEuler
 {
@@ -26,7 +27,10 @@ namespace ProjectEuler
             switch (problemSelection)
             {
                 case 1:
-                    problem = new Problem1.Problem1(1000);
+                    problem = new Problem1(1000);
+                    break;
+                case 2:
+                    problem = new Problem2(4000000);
                     break;
                 default:
                     Console.WriteLine("not yet implemented");
