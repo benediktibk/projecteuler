@@ -2,6 +2,6 @@
 {
     public interface IProblem
     {
-        int Solve();
+        long Solve();
     }
 }

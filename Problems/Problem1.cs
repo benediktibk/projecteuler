@@ -15,7 +15,7 @@ namespace Problems
             _limit = limit;
         }
 
-        public int Solve()
+        public long Solve()
         {
             var result = 0;
 

@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Common
 {
     public class PrimeNumbers
     {
-        private readonly List<int> _primeNumbers;
-        private int _currentUpperBorder;
+        private readonly List<long> _primeNumbers;
+        private long _currentUpperBorder;
 
         public PrimeNumbers()
         {
-            _primeNumbers = new List<int>();
+            _primeNumbers = new List<long>();
             _currentUpperBorder = 1;
         }
 
-        public List<int> UpTo(int limit)
+        public List<long> UpTo(long limit)
         {
             ExtendPrimeNumbers(limit);
             return UpToInternal(limit);
         }
 
-        private List<int> UpToInternal(int limit)
+        private List<long> UpToInternal(long limit)
         {
             if (limit > _currentUpperBorder)
                 throw new ArgumentException("limit");
@@ -30,7 +29,7 @@ namespace Common
             var upper = _primeNumbers.Count - 1;
 
             if (_primeNumbers[upper] == limit)
-                return new List<int>(_primeNumbers);
+                return new List<long>(_primeNumbers);
 
             while (upper - lower > 1)
             {
@@ -45,11 +44,23 @@ namespace Common
             return _primeNumbers.GetRange(0, upper + 1);
         }
 
-        private void ExtendPrimeNumbers(int limit)
+        private void ExtendPrimeNumbers(long limit)
         {
             if (limit <= _currentUpperBorder)
                 return;
 
+            var blockSize = (int)Math.Pow(2, 30 - 2);
+
+            var blockCount = (int)((limit - _currentUpperBorder)/blockSize);
+
+            for (var i = 0; i < blockCount; ++i)
+                ExtendPrimeNumbersInternal(_currentUpperBorder + blockSize);
+
+            ExtendPrimeNumbersInternal(limit);
+        }
+
+        private void ExtendPrimeNumbersInternal(long limit)
+        {
             var offset = _currentUpperBorder + 1;
             var notPrime = new bool[limit - _currentUpperBorder];
 
@@ -64,15 +75,15 @@ namespace Common
                 }
             }
 
-            var newPrimeNumbers = new LinkedList<int>();
+            var newPrimeNumbers = new LinkedList<long>();
 
             for (var candidate = _currentUpperBorder + 1; candidate <= limit; ++candidate)
             {
                 if (notPrime[candidate - offset])
                     continue;
 
-                var nextCandidate = candidate * 2; 
-                
+                var nextCandidate = candidate*2;
+
                 while (nextCandidate <= limit)
                 {
                     notPrime[nextCandidate - offset] = true;
