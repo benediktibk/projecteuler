@@ -1,4 +1,5 @@
 ﻿using System;
+using Common;
 
 namespace ProjectEuler
 {
@@ -20,13 +21,21 @@ namespace ProjectEuler
                 problemSelection = -1;
             } while (problemSelection < 1);
 
+            IProblem problem;
+
             switch (problemSelection)
             {
+                case 1:
+                    problem = new Problem1.Problem1(1000);
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
-                    break;
+                    Console.ReadKey();
+                    return;
             }
 
+            var result = problem.Solve();
+            Console.WriteLine("result: " + result);
             Console.ReadKey();
         }
     }

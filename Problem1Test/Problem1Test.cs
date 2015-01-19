@@ -12,6 +12,7 @@ namespace Problem1Test
 
             Assert.AreEqual(23, problem.Solve());
         }
+
         [TestMethod]
         public void Solve_1000_233168()
         {
