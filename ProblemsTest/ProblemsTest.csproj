@@ -6,8 +6,8 @@
     <ProjectGuid>{49B5E5B6-0F45-4612-B1D4-43D3F79DCD4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Problem1Test</RootNamespace>
-    <AssemblyName>Problem1Test</AssemblyName>
+    <RootNamespace>ProblemsTest</RootNamespace>
+    <AssemblyName>ProblemsTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Problem2Test.cs" />
     <Compile Include="Problem3Test.cs" />
+    <Compile Include="Problem4Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

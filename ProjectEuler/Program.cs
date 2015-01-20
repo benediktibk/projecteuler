@@ -32,6 +32,12 @@ namespace ProjectEuler
                 case 2:
                     problem = new Problem2(4000000);
                     break;
+                case 3:
+                    problem = new Problem3(600851475143);
+                    break;
+                case 4:
+                    problem = new Problem4(3);
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
