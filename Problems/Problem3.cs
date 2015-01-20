@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Common;
 
 namespace Problems
@@ -19,12 +18,7 @@ namespace Problems
         public long Solve()
         {
             var primeNumbers = new PrimeNumbers();
-            var candidates = primeNumbers.UpTo(_number);
-
-            if (candidates.Last() == _number)
-                return _number;
-
-            candidates = primeNumbers.UpTo((long)Math.Sqrt(_number));
+            var candidates = primeNumbers.UpTo((long)Math.Sqrt(_number));
 
             for (var i = candidates.Count - 1; i >= 0; --i)
             {
@@ -34,7 +28,7 @@ namespace Problems
                     return candidate;
             }
 
-            throw new Exception("should never reach this point");
+            return _number;
         }
     }
 }

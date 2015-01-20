@@ -28,7 +28,7 @@ namespace Common
             var lower = 0;
             var upper = _primeNumbers.Count - 1;
 
-            if (_primeNumbers[upper] == limit)
+            if (upper >= 0 && _primeNumbers[upper] == limit)
                 return new List<long>(_primeNumbers);
 
             while (upper - lower > 1)
