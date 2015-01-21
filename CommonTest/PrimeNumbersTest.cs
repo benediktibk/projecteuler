@@ -99,5 +99,23 @@ namespace CommonTest
             Assert.AreEqual(2, result[2]);
             Assert.AreEqual(1, result[3]);
         }
+
+        [TestMethod]
+        public void UpperBorderForNumberOfPrimeNumbers_100_AtLeast25()
+        {
+            Assert.IsTrue(_primeNumbers.UpperBorderForNumberOfPrimeNumbers(100) >= 25);
+        }
+
+        [TestMethod]
+        public void UpperBorderForNumberOfPrimeNumbers_1000_AtLeast168()
+        {
+            Assert.IsTrue(_primeNumbers.UpperBorderForNumberOfPrimeNumbers(1000) >= 168);
+        }
+
+        [TestMethod]
+        public void UpperBorderForNumberOfPrimeNumbers_10000_AtLeast1229()
+        {
+            Assert.IsTrue(_primeNumbers.UpperBorderForNumberOfPrimeNumbers(10000) >= 1229);
+        }
     }
 }

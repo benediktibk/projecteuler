@@ -54,6 +54,14 @@ namespace Common
             return result;
         }
 
+        public long UpperBorderForNumberOfPrimeNumbers(long x)
+        {
+            if (x < 100)
+                return 25;
+
+            return (long)(x/Math.Log(x)*1.2);
+        }
+
         private List<long> UpToInternal(long limit)
         {
             if (limit > _currentUpperBorder)
