@@ -33,10 +33,13 @@ namespace ProjectEuler
                     problem = new Problem2(4000000);
                     break;
                 case 3:
-                    problem = new Problem3(600851475143);
+                    problem = new Problem3(600851475143, new PrimeNumbers());
                     break;
                 case 4:
                     problem = new Problem4(3);
+                    break;
+                case 5:
+                    problem = new Problem5(20, new PrimeNumbers());
                     break;
                 default:
                     Console.WriteLine("not yet implemented");

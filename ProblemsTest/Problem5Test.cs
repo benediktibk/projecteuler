@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems;
 
 namespace ProblemsTest
@@ -9,7 +10,7 @@ namespace ProblemsTest
         [TestMethod]
         public void Solve_20_232792560()
         {
-            var problem = new Problem5(20);
+            var problem = new Problem5(20, new PrimeNumbers());
 
             Assert.AreEqual(232792560, problem.Solve());
         }

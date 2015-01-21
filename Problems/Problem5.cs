@@ -7,23 +7,24 @@ namespace Problems
     public class Problem5 : IProblem
     {
         private readonly int _limit;
+        private readonly PrimeNumbers _primeNumbers;
 
-        public Problem5(int limit)
+        public Problem5(int limit, PrimeNumbers primeNumbers)
         {
             if (limit < 2)
                 throw new ArgumentException("limit");
 
             _limit = limit;
+            _primeNumbers = primeNumbers;
         }
 
         public long Solve()
         {
-            var primeNumbers = new PrimeNumbers();
             var totalPrimeFactors = new Dictionary<long, long>();
 
             for (var i = 2; i < _limit; ++i)
             {
-                var primeFactors = primeNumbers.Factorize(i);
+                var primeFactors = _primeNumbers.Factorize(i);
 
                 foreach (var primeFactor in primeFactors)
                 {
