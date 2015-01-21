@@ -14,9 +14,14 @@ namespace Common
             _currentUpperBorder = 1;
         }
 
+        public int Count
+        {
+            get { return _primeNumbers.Count; }
+        }
+
         public List<long> UpTo(long limit)
         {
-            ExtendPrimeNumbers(limit);
+            Extend(limit);
             return UpToInternal(limit);
         }
 
@@ -62,6 +67,21 @@ namespace Common
             return (long)(x/Math.Log(x)*1.2);
         }
 
+        public void Extend(long limit)
+        {
+            if (limit <= _currentUpperBorder)
+                return;
+
+            var blockSize = (int)Math.Pow(2, 30 - 2);
+
+            var blockCount = (int)((limit - _currentUpperBorder) / blockSize);
+
+            for (var i = 0; i < blockCount; ++i)
+                ExtendInternal(_currentUpperBorder + blockSize);
+
+            ExtendInternal(limit);
+        }
+
         private List<long> UpToInternal(long limit)
         {
             if (limit > _currentUpperBorder)
@@ -86,22 +106,7 @@ namespace Common
             return _primeNumbers.GetRange(0, upper + 1);
         }
 
-        private void ExtendPrimeNumbers(long limit)
-        {
-            if (limit <= _currentUpperBorder)
-                return;
-
-            var blockSize = (int)Math.Pow(2, 30 - 2);
-
-            var blockCount = (int)((limit - _currentUpperBorder)/blockSize);
-
-            for (var i = 0; i < blockCount; ++i)
-                ExtendPrimeNumbersInternal(_currentUpperBorder + blockSize);
-
-            ExtendPrimeNumbersInternal(limit);
-        }
-
-        private void ExtendPrimeNumbersInternal(long limit)
+        private void ExtendInternal(long limit)
         {
             var offset = _currentUpperBorder + 1;
             var notPrime = new bool[limit - _currentUpperBorder];
