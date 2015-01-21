@@ -20,13 +20,15 @@ namespace Common
             return UpToInternal(limit);
         }
 
-        public List<long> Factorize(long value)
+        public Dictionary<long, long> Factorize(long value)
         {
             var factorCandidates = UpTo((long)Math.Sqrt(value));
-            var result = new List<long>();
+            var result = new Dictionary<long, long>();
 
             foreach (var factorCandidate in factorCandidates)
             {
+                var alreadyAdded = false;
+
                 while (true)
                 {
                     var remainder = value%factorCandidate;
@@ -35,12 +37,19 @@ namespace Common
                         break;
 
                     value /= factorCandidate;
-                    result.Add(factorCandidate);
+
+                    if (alreadyAdded)
+                        result[factorCandidate]++;
+                    else
+                    {
+                        result[factorCandidate] = 1;
+                        alreadyAdded = true;
+                    }
                 }
             }
 
             if (result.Count == 0)
-                result.Add(value);
+                result[value] = 1;
 
             return result;
         }

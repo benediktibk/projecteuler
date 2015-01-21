@@ -78,7 +78,7 @@ namespace CommonTest
             var result = _primeNumbers.Factorize(5);
 
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(5, result[0]);
+            Assert.AreEqual(1, result[5]);
         }
 
         [TestMethod]
@@ -86,9 +86,8 @@ namespace CommonTest
         {
             var result = _primeNumbers.Factorize(25);
 
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(5, result[0]);
-            Assert.AreEqual(5, result[1]);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result[5]);
         }
 
         [TestMethod]
@@ -96,10 +95,9 @@ namespace CommonTest
         {
             var result = _primeNumbers.Factorize(12);
 
-            Assert.AreEqual(3, result.Count);
-            Assert.AreEqual(2, result[0]);
-            Assert.AreEqual(2, result[1]);
-            Assert.AreEqual(3, result[2]);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(2, result[2]);
+            Assert.AreEqual(1, result[3]);
         }
     }
 }

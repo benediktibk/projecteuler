@@ -55,6 +55,7 @@
     <Compile Include="Problem2Test.cs" />
     <Compile Include="Problem3Test.cs" />
     <Compile Include="Problem4Test.cs" />
+    <Compile Include="Problem5Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
