@@ -41,6 +41,15 @@ namespace ProjectEuler
                 case 5:
                     problem = new Problem5(20, new PrimeNumbers());
                     break;
+                case 6:
+                    problem = new Problem6(100);
+                    break;
+                case 7:
+                    problem = new Problem7(10001, new PrimeNumbers());
+                    break;
+                case 8:
+                    problem = new Problem8(13);
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
