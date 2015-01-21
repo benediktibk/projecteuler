@@ -6,12 +6,18 @@ namespace CommonTest
     [TestClass]
     public class PrimeNumbersTest
     {
+        private PrimeNumbers _primeNumbers;
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _primeNumbers = new PrimeNumbers();
+        }
+
         [TestMethod]
         public void UpTo_5_CorrectResult()
         {
-            var primeNumbers = new PrimeNumbers();
-
-            var result = primeNumbers.UpTo(5);
+            var result = _primeNumbers.UpTo(5);
 
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(2, result[0]);
@@ -22,9 +28,7 @@ namespace CommonTest
         [TestMethod]
         public void UpTo_25_CorrectResult()
         {
-            var primeNumbers = new PrimeNumbers();
-
-            var result = primeNumbers.UpTo(25);
+            var result = _primeNumbers.UpTo(25);
 
             Assert.AreEqual(9, result.Count);
             Assert.AreEqual(2, result[0]);
@@ -41,10 +45,8 @@ namespace CommonTest
         [TestMethod]
         public void UpTo_25And5_CorrectResult()
         {
-            var primeNumbers = new PrimeNumbers();
-
-            primeNumbers.UpTo(25);
-            var result = primeNumbers.UpTo(5);
+            _primeNumbers.UpTo(25);
+            var result = _primeNumbers.UpTo(5);
 
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(2, result[0]);
@@ -55,10 +57,8 @@ namespace CommonTest
         [TestMethod]
         public void UpTo_5And25_CorrectResult()
         {
-            var primeNumbers = new PrimeNumbers();
-
-            primeNumbers.UpTo(5);
-            var result = primeNumbers.UpTo(25);
+            _primeNumbers.UpTo(5);
+            var result = _primeNumbers.UpTo(25);
 
             Assert.AreEqual(9, result.Count);
             Assert.AreEqual(2, result[0]);
@@ -70,6 +70,36 @@ namespace CommonTest
             Assert.AreEqual(17, result[6]);
             Assert.AreEqual(19, result[7]);
             Assert.AreEqual(23, result[8]);
+        }
+
+        [TestMethod]
+        public void Factorize_5_CorrectResult()
+        {
+            var result = _primeNumbers.Factorize(5);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(5, result[0]);
+        }
+
+        [TestMethod]
+        public void Factorize_25_CorrectResult()
+        {
+            var result = _primeNumbers.Factorize(25);
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(5, result[0]);
+            Assert.AreEqual(5, result[1]);
+        }
+
+        [TestMethod]
+        public void Factorize_12_CorrectResult()
+        {
+            var result = _primeNumbers.Factorize(12);
+
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(2, result[0]);
+            Assert.AreEqual(2, result[1]);
+            Assert.AreEqual(3, result[2]);
         }
     }
 }

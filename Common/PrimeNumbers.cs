@@ -20,6 +20,31 @@ namespace Common
             return UpToInternal(limit);
         }
 
+        public List<long> Factorize(long value)
+        {
+            var factorCandidates = UpTo((long)Math.Sqrt(value));
+            var result = new List<long>();
+
+            foreach (var factorCandidate in factorCandidates)
+            {
+                while (true)
+                {
+                    var remainder = value%factorCandidate;
+
+                    if (remainder != 0)
+                        break;
+
+                    value /= factorCandidate;
+                    result.Add(factorCandidate);
+                }
+            }
+
+            if (result.Count == 0)
+                result.Add(value);
+
+            return result;
+        }
+
         private List<long> UpToInternal(long limit)
         {
             if (limit > _currentUpperBorder)
