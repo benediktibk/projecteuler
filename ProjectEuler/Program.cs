@@ -57,6 +57,9 @@ namespace ProjectEuler
                 case 10:
                     problem = new Problem10(2000000, primeNumbers);
                     break;
+                case 11:
+                    problem = new Problem11();
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
