@@ -25,10 +25,10 @@ namespace Common
             return UpToInternal(limit);
         }
 
-        public Dictionary<long, long> Factorize(long value)
+        public Factorization Factorize(long value)
         {
             var factorCandidates = UpTo((long)Math.Sqrt(value));
-            var result = new Dictionary<long, long>();
+            var result = new Factorization();
 
             foreach (var factorCandidate in factorCandidates)
             {
@@ -53,7 +53,7 @@ namespace Common
                 }
             }
 
-            if (result.Count == 0)
+            if (result.FactorCount == 0)
                 result[value] = 1;
 
             return result;

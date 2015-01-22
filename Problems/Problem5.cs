@@ -20,33 +20,18 @@ namespace Problems
 
         public long Solve()
         {
-            var totalPrimeFactors = new Dictionary<long, long>();
+            var totalPrimeFactors = new Factorization();
 
             for (var i = 2; i < _limit; ++i)
             {
                 var primeFactors = _primeNumbers.Factorize(i);
 
-                foreach (var primeFactor in primeFactors)
-                {
-                    long currentCount;
-                    if (totalPrimeFactors.TryGetValue(primeFactor.Key, out currentCount))
-                        totalPrimeFactors[primeFactor.Key] = Math.Max(currentCount, primeFactor.Value);
-                    else
-                        totalPrimeFactors[primeFactor.Key] = primeFactor.Value;
-                }
+                totalPrimeFactors = Factorization.Max(totalPrimeFactors, primeFactors);
             }
 
             totalPrimeFactors[2] = Math.Max(2, totalPrimeFactors[2]);
 
-            long result = 1;
-
-            foreach (var primeFactor in totalPrimeFactors)
-            {
-                for (var i = 0; i < primeFactor.Value; ++i)
-                    result *= primeFactor.Key;
-            }
-
-            return result;
+            return totalPrimeFactors.CalculateProduct();
         }
     }
 }
