@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Common
 {
-    public class Factorization
+    public class Factorization : IReadOnlyFactorization
     {
         private readonly Dictionary<long, long> _factors;
 

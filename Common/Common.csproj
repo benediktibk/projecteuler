@@ -40,8 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factorization.cs" />
-    <Compile Include="FactorizingCache.cs" />
+    <Compile Include="FactorizationCache.cs" />
     <Compile Include="IProblem.cs" />
+    <Compile Include="IReadOnlyFactorization.cs" />
     <Compile Include="PrimeNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
