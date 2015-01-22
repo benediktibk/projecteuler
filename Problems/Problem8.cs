@@ -20,11 +20,11 @@ namespace Problems
             var numberList = new List<int>(numberAsString.Length);
             numberList.AddRange(numberAsString.Select(digit => (int) Char.GetNumericValue(digit)));
 
-            var result = 0;
+            long result = 0;
 
             for (var position = 0; position <= numberList.Count - _length; ++position)
             {
-                var product = 1;
+                long product = 1;
 
                 for (var i = 0; i < _length; ++i)
                     product *= numberList[position + i];
