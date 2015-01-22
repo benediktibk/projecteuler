@@ -30,7 +30,7 @@ namespace Common
 
             foreach (var factorCandidate in factorCandidates.Where(factorCandidate => value % factorCandidate == 0))
             {
-                result = FactorizeInternal(value / factorCandidate);
+                result = new Factorization(FactorizeInternal(value / factorCandidate));
                 result[factorCandidate]++;
                 _factorizations.Add(value, result);
                 return result;

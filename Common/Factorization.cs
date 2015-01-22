@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,11 @@ namespace Common
         public Factorization()
         {
             _factors = new Dictionary<long, long>();
+        }
+
+        public Factorization(Factorization factorization)
+        {
+            _factors = new Dictionary<long, long>(factorization._factors);
         }
 
         public long this[long factor]
@@ -57,6 +63,16 @@ namespace Common
             }
 
             return result;
+        }
+
+        public IEnumerator<KeyValuePair<long, long>> GetEnumerator()
+        {
+            return _factors.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable) _factors).GetEnumerator();
         }
     }
 }

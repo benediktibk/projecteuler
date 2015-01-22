@@ -25,5 +25,26 @@ namespace CommonTest
             Assert.AreEqual(2, factorization[2]);
             Assert.AreEqual(1, factorization[7]);
         }
+
+        [TestMethod]
+        public void Factorize_15_CorrectResult()
+        {
+            var factorization = _factorizationCache.Factorize(15);
+
+            Assert.AreEqual(2, factorization.TotalFactorCount);
+            Assert.AreEqual(1, factorization[3]);
+            Assert.AreEqual(1, factorization[5]);
+        }
+
+        [TestMethod]
+        public void Factorize_10And15_CorrectResult()
+        {
+            _factorizationCache.Factorize(10);
+            var factorization = _factorizationCache.Factorize(15);
+
+            Assert.AreEqual(2, factorization.TotalFactorCount);
+            Assert.AreEqual(1, factorization[3]);
+            Assert.AreEqual(1, factorization[5]);
+        }
     }
 }
