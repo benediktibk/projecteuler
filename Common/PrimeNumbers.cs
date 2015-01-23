@@ -72,7 +72,7 @@ namespace Common
             if (limit <= _currentUpperBorder)
                 return;
 
-            var blockSize = (int)Math.Pow(2, 30 - 2);
+            var blockSize = (int)Math.Pow(2, 24);
 
             var blockCount = (int)((limit - _currentUpperBorder) / blockSize);
 
@@ -108,8 +108,12 @@ namespace Common
 
         private void ExtendInternal(long limit)
         {
-            var offset = _currentUpperBorder + 1;
-            var notPrime = new bool[limit - _currentUpperBorder];
+            var candidatesList = new List<long>((int)(limit - _currentUpperBorder));
+
+            for (var candidate = _currentUpperBorder + 1; candidate <= limit; ++candidate)
+                candidatesList.Add(candidate);
+
+            var candidates = new HashSet<long>(candidatesList);
 
             foreach (var primeNumber in _primeNumbers)
             {
@@ -117,23 +121,24 @@ namespace Common
 
                 while (nextCandidate <= limit)
                 {
-                    notPrime[nextCandidate - offset] = true;
+                    candidates.Remove(nextCandidate);
                     nextCandidate += primeNumber;
                 }
             }
 
             var newPrimeNumbers = new LinkedList<long>();
+            var reducedCandidates = new HashSet<long>(candidates);
 
-            for (var candidate = _currentUpperBorder + 1; candidate <= limit; ++candidate)
+            foreach (var candidate in candidates)
             {
-                if (notPrime[candidate - offset])
+                if (!reducedCandidates.Contains(candidate))
                     continue;
 
                 var nextCandidate = candidate*2;
 
                 while (nextCandidate <= limit)
                 {
-                    notPrime[nextCandidate - offset] = true;
+                    reducedCandidates.Remove(nextCandidate);
                     nextCandidate += candidate;
                 }
 

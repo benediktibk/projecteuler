@@ -8,11 +8,13 @@ namespace ProblemsTest
     public class Problem12Test
     {
         private FactorizationCache _factorizationCache;
+        private PrimeNumbers _primeNumbers;
 
         [TestInitialize]
         public void SetUp()
         {
-            _factorizationCache = new FactorizationCache(new PrimeNumbers());
+            _primeNumbers = new PrimeNumbers();
+            _factorizationCache = new FactorizationCache(_primeNumbers);
         }
 
         [TestMethod]
