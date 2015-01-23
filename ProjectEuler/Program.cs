@@ -64,6 +64,9 @@ namespace ProjectEuler
                 case 12:
                     problem = new Problem12(factorizationCache, 500);
                     break;
+                case 13:
+                    problem = new Problem13();
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
