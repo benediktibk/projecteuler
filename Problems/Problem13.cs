@@ -27,32 +27,20 @@ namespace Problems
 
         public long Solve()
         {
-            var summands = new List<List<int>>(_numberCount);
-
-            for (var i = 0; i < _numberCount; ++i)
-            {
-                var summand = new List<int>(_digitCount);
-                var stringStart = (_digitCount + 1)*i;
-                var stringEnd = (_digitCount + 1)*i + _digitCount - 1;
-
-                for (var position = stringEnd; position >= stringStart; --position)
-                {
-                    var character = _summandsString[position];
-                    summand.Add((int) Char.GetNumericValue(character));
-                }
-
-                summands.Add(summand);
-            }
-
+            var summands = ParseString();
             var sum = summands[0];
 
             for (var i = 1; i < _numberCount; ++i)
                 sum = Add(sum, summands[i]);
 
-            var result = 0;
+            long result = 0;
+            long shifter = 1;
 
-            for (var i = 1; i <= 10; ++i)
-                result += sum[sum.Count - i];
+            for (var i = 0; i < 10; ++i, shifter *= 10)
+            {
+                var digit = sum[sum.Count - 10 + i];
+                result += digit*shifter;
+            }
 
             return result;
         }
@@ -100,6 +88,27 @@ namespace Problems
             }
 
             return result;
+        }
+
+        private List<List<int>> ParseString()
+        {
+            var summands = new List<List<int>>(_numberCount);
+
+            for (var i = 0; i < _numberCount; ++i)
+            {
+                var summand = new List<int>(_digitCount);
+                var stringStart = (_digitCount + 1) * i;
+                var stringEnd = (_digitCount + 1) * i + _digitCount - 1;
+
+                for (var position = stringEnd; position >= stringStart; --position)
+                {
+                    var character = _summandsString[position];
+                    summand.Add((int)Char.GetNumericValue(character));
+                }
+
+                summands.Add(summand);
+            }
+            return summands;
         }
     }
 }
