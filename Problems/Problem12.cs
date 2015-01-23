@@ -25,6 +25,11 @@ namespace Problems
                 var factorization = _factorizationCache.Factorize(number);
                 var divisorCount = CalculateCountOfPossibleDivisors(factorization);
 
+                /*var divisorCount = 0;
+                for (var j = 1; j <= number; ++j)
+                    if (number % j == 0)
+                        divisorCount++;*/
+
                 if (divisorCount > _factorCount)
                     return number;
             }

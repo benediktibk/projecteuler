@@ -54,5 +54,93 @@ namespace ProblemsTest
 
             Assert.AreEqual(28, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_6Divisors_36()
+        {
+            var problem = new Problem12(_factorizationCache, 6);
+
+            Assert.AreEqual(36, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_7Divisors_36()
+        {
+            var problem = new Problem12(_factorizationCache, 7);
+
+            Assert.AreEqual(36, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_8Divisors_36()
+        {
+            var problem = new Problem12(_factorizationCache, 8);
+
+            Assert.AreEqual(36, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_9Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 9);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_10Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 10);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_11Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 11);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_12Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 12);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_13Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 13);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_14Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 14);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_15Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 15);
+
+            Assert.AreEqual(120, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_16Divisors_120()
+        {
+            var problem = new Problem12(_factorizationCache, 16);
+
+            Assert.AreEqual(300, problem.Solve());
+        }
     }
 }
