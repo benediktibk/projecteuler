@@ -142,5 +142,13 @@ namespace ProblemsTest
 
             Assert.AreEqual(300, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_500Divisors_76576500()
+        {
+            var problem = new Problem12(_factorizationCache, 500);
+
+            Assert.AreEqual(76576500, problem.Solve());
+        }
     }
 }

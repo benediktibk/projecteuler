@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Common;
 
 namespace Problems
@@ -24,43 +24,17 @@ namespace Problems
 
                 var factorization = _factorizationCache.Factorize(number);
                 var divisorCount = CalculateCountOfPossibleDivisors(factorization);
-
-                /*var divisorCount = 0;
-                for (var j = 1; j <= number; ++j)
-                    if (number % j == 0)
-                        divisorCount++;*/
-
                 if (divisorCount > _factorCount)
                     return number;
             }
         }
 
-        private static long CalculateCountOfPossibleDivisors(IReadOnlyFactorization factorization)
+        private static long CalculateCountOfPossibleDivisors(IEnumerable<KeyValuePair<long, long>> factorization)
         {
-            var primeFactorCount = factorization.TotalFactorCount;
             long result = 1;
 
-            for (var i = 1; i <= primeFactorCount; ++i)
-                result += CalculateSelectionOutOf(primeFactorCount, i);
-
             foreach (var factors in factorization)
-                for (var i = 2; i <= factors.Value; ++i)
-                    result -= CalculateSelectionOutOf(factors.Value, i);
-
-            return result;
-        }
-
-        private static long CalculateSelectionOutOf(long n, long k)
-        {
-            return CalculateFactorial(n)/(CalculateFactorial(k)*CalculateFactorial(n - k));
-        }
-
-        private static long CalculateFactorial(long n)
-        {
-            var result = 1;
-
-            for (var i = 2; i <= n; ++i)
-                result *= i;
+                result *= (factors.Value + 1);
 
             return result;
         }
