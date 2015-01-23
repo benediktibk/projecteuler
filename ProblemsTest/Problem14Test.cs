@@ -39,7 +39,7 @@ namespace ProblemsTest
         {
             var problem = new Problem14();
 
-            Assert.AreEqual(1, problem.Solve());
+            Assert.AreEqual(837799, problem.Solve());
         }
     }
 }

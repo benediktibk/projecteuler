@@ -20,7 +20,7 @@ namespace Problems
             long result = 0;
             long resultLength = 0;
 
-            for (long i = 0; i < _border; ++i)
+            for (long i = 1; i < _border; ++i)
             {
                 var length = CalculateSequenceLength(i);
 
