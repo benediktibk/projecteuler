@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 
 namespace Problems
@@ -10,8 +11,7 @@ namespace Problems
 
         public Problem14()
         {
-            _sequenceLenghts = new Dictionary<long, long>();
-            _sequenceLenghts.Add(1, 1);
+            _sequenceLenghts = new Dictionary<long, long> {{1, 1}};
             _border = 1000000;
         }
 
@@ -36,18 +36,25 @@ namespace Problems
 
         public long CalculateSequenceLength(long number)
         {
-            long length = 0;
+            long length;
             var numbers = new LinkedList<long>();
+            var nextNumber = number;
 
             while (true)
             {
-                if (_sequenceLenghts.TryGetValue(number, out length))
-                    return length;
+                if (_sequenceLenghts.TryGetValue(nextNumber, out length))
+                    break;
 
-                var nextNumber = number%2 == 0 ? number/2 : 3*number + 1;
-                length = CalculateSequenceLength(nextNumber) + 1;
-                _sequenceLenghts[number] = length;
+                numbers.AddLast(nextNumber);
+                nextNumber = nextNumber % 2 == 0 ? nextNumber / 2 : 3 * nextNumber + 1;
             }
+
+            foreach (var x in numbers.Reverse())
+            {
+                length++;
+                _sequenceLenghts[x] = length;
+            }
+
             return length;
         }
     }
