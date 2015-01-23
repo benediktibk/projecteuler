@@ -6,7 +6,7 @@ namespace Problems
 {
     public class Problem11 : IProblem
     {
-        private List<List<int>> _grid;
+        private List<List<long>> _grid;
         private readonly int _dimension;
         private readonly int _length;
 
@@ -18,10 +18,10 @@ namespace Problems
             InitializeGrid(gridString);
         }
 
-        public Problem11(string gridString, int dimension)
+        public Problem11(string gridString, int dimension, int length)
         {
             _dimension = dimension;
-            _length = 4;
+            _length = length;
             InitializeGrid(gridString);
         }
 
@@ -36,7 +36,7 @@ namespace Problems
             return result;
         }
 
-        private void FindMaximumProductInRows(IReadOnlyList<IReadOnlyList<int>> grid, ref long result)
+        private void FindMaximumProductInRows(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
         {
             for (var row = 0; row < _dimension; ++row)
                 for (var column = 0; column < _dimension - _length + 1; ++column)
@@ -50,12 +50,12 @@ namespace Problems
                 }
         }
 
-        private void FindMaximumProductInMainDiagonals(IReadOnlyList<IReadOnlyList<int>> grid, ref long result)
+        private void FindMaximumProductInMainDiagonals(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
         {
             for (var row = 0; row < _dimension - _length + 1; ++row)
                 for (var column = 0; column < _dimension - _length + 1 - row; ++column)
                 {
-                    long product = grid[row][column];
+                    var product = grid[row][column];
 
                     for (var i = 1; i < _length; ++i)
                         product *= grid[row + i][column + i];
@@ -66,7 +66,7 @@ namespace Problems
             for (var column = 1; column < _dimension - _length + 1; ++column)
                 for (var row = 0; row < _dimension - _length + 1 - column; ++row)
                 {
-                    long product = grid[row][column];
+                    var product = grid[row][column];
 
                     for (var i = 1; i < _length; ++i)
                         product *= grid[row + i][column + i];
@@ -75,13 +75,13 @@ namespace Problems
                 }
         }
 
-        private List<List<int>> RotateGrid()
+        private List<List<long>> RotateGrid()
         {
-            var rotatedGrid = new List<List<int>>(_dimension);
+            var rotatedGrid = new List<List<long>>(_dimension);
 
             for (var row = 0; row < _dimension; ++row)
             {
-                var values = new List<int>(_dimension);
+                var values = new List<long>(_dimension);
 
                 for (var column = 0; column < _dimension; ++column)
                     values.Add(_grid[column][_dimension - row - 1]);
@@ -94,14 +94,14 @@ namespace Problems
 
         private void InitializeGrid(string gridString)
         {
-            _grid = new List<List<int>>(_dimension);
+            _grid = new List<List<long>>(_dimension);
 
             for (var i = 0; i < _dimension; ++i)
             {
                 var lineStart = i * (_dimension * 2 + _dimension);
                 var lineLength = _dimension * 2 + _dimension - 1;
                 var lineString = gridString.Substring(lineStart, lineLength);
-                var lineValues = new List<int>(_dimension);
+                var lineValues = new List<long>(_dimension);
 
                 for (var j = 0; j < _dimension; ++j)
                 {
