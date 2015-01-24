@@ -31,6 +31,38 @@ namespace ProblemsTest
         }
 
         [TestMethod]
+        public void Solve_SmallGridVersionTwo_CorrectResult()
+        {
+            var problem = new Problem11("02 08 00 00\n00 03 07 00\n00 00 04 09\n00 00 00 05", 4, 3);
+
+            Assert.AreEqual(7*8*9, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_SmallGridVersionThree_CorrectResult()
+        {
+            var problem = new Problem11("02 00 00 00\n07 03 00 00\n00 08 04 00\n00 00 09 05", 4, 3);
+
+            Assert.AreEqual(7 * 8 * 9, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_SmallGridVersionFour_CorrectResult()
+        {
+            var problem = new Problem11("00 00 07 05\n00 08 03 00\n09 04 00 00\n02 00 00 00", 4, 3);
+
+            Assert.AreEqual(7 * 8 * 9, problem.Solve());
+        }
+
+        [TestMethod]
+        public void Solve_SmallGridVersionFive_CorrectResult()
+        {
+            var problem = new Problem11("00 00 00 05\n00 00 03 08\n00 04 07 00\n02 09 00 00", 4, 3);
+
+            Assert.AreEqual(7 * 8 * 9, problem.Solve());
+        }
+
+        [TestMethod]
         public void Solve_SmallGridWithValuesOnlyOnMinorDiagonal_CorrectResult()
         {
             var problem = new Problem11("00 00 00 05\n00 00 03 00\n00 04 00 00\n02 00 00 00", 4, 4);
