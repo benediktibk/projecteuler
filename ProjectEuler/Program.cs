@@ -70,6 +70,12 @@ namespace ProjectEuler
                 case 14:
                     problem = new Problem14();
                     break;
+                case 15:
+                    problem = new Problem15(20);
+                    break;
+                case 16:
+                    problem = new Problem16(1000);
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
