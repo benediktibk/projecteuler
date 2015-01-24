@@ -80,6 +80,9 @@ namespace ProjectEuler
                 case 17:
                     problem = new Problem17(1000, numberWordGenerator);
                     break;
+                case 18:
+                    problem = new Problem18(Problem18.GetTriangleForProblem18());
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();
