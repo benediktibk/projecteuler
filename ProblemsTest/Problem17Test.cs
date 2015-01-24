@@ -22,5 +22,13 @@ namespace ProblemsTest
 
             Assert.AreEqual(19, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_Limit1000_21124()
+        {
+            var problem = new Problem17(1000, _numberWordGenerator);
+
+            Assert.AreEqual(21124, problem.Solve());
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Problems
 
             for (var i = 1; i <= _limit; ++i)
             {
-                var word = _numberWordGenerator.GetStringFor(i);
+                var word = _numberWordGenerator[i];
                 result += word.Count(x => x != ' ' && x != '-');
             }
 

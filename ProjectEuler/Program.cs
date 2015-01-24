@@ -25,6 +25,7 @@ namespace ProjectEuler
             IProblem problem;
             var primeNumbers = new PrimeNumbers();
             var factorizationCache = new FactorizationCache(primeNumbers);
+            var numberWordGenerator = new NumberWordGenerator();
 
             switch (problemSelection)
             {
@@ -75,6 +76,9 @@ namespace ProjectEuler
                     break;
                 case 16:
                     problem = new Problem16(1000);
+                    break;
+                case 17:
+                    problem = new Problem17(1000, numberWordGenerator);
                     break;
                 default:
                     Console.WriteLine("not yet implemented");

@@ -30,7 +30,6 @@ namespace Common
                 {17, "seventeen"},
                 {18, "eighteen"},
                 {19, "nineteen"},
-                {20, "thirteen"},
                 {20, "twenty"},
                 {30, "thirty"},
                 {40, "forty"},
@@ -38,25 +37,40 @@ namespace Common
                 {60, "sixty"},
                 {70, "seventy"},
                 {80, "eighty"},
-                {90, "ninety"}
+                {90, "ninety"},
+                {1000, "one thousand"}
             };
         }
 
-        public string GetStringFor(int number)
+        public string this[int number]
         {
-            string result;
-
-            if (_cache.TryGetValue(number, out result))
-                return result;
-
-            if (number > 20 && number < 100)
+            get
             {
-                var withoutLastDigit = number / 10 * 10;
-                var lastDigit = number - withoutLastDigit;
-                return Add(number, GetStringFor(withoutLastDigit) + "-" + GetStringFor(lastDigit));
-            }
+                string result;
 
-            throw new Exception("do not know how to create the string for " + number);
+                if (_cache.TryGetValue(number, out result))
+                    return result;
+
+                if (number > 20 && number < 100)
+                {
+                    var withoutLastDigit = number/10*10;
+                    var lastDigit = number - withoutLastDigit;
+                    return Add(number, this[withoutLastDigit] + "-" + this[lastDigit]);
+                }
+                
+                if (number >= 100 && number < 1000)
+                {
+                    var hundreds = number/100;
+
+                    if (hundreds*100 == number)
+                        return Add(number, this[hundreds] + " hundred");
+
+                    var rest = number - hundreds*100;
+                    return Add(number, this[hundreds*100] + " and " + this[rest]);
+                }
+
+                throw new Exception("do not know how to create the string for " + number);
+            }
         }
 
         private string Add(int number, string word)
