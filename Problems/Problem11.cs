@@ -45,6 +45,41 @@ namespace Problems
             }
         }
 
+        private void FindMaximumProductInMainDiagonals(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
+        {
+            var diagonals = ExtractDiagonals(grid);
+
+            foreach (var diagonal in diagonals)
+                FindMaximumProductInList(diagonal, ref result);
+        }
+
+        private IEnumerable<List<long>> ExtractDiagonals(IReadOnlyList<IReadOnlyList<long>> grid)
+        {
+            var result = new List<List<long>>(_dimension*2 - 1);
+
+            for (var column = _dimension - 1; column > 0; --column)
+            {
+                var diagonal = new List<long>(_dimension - column);
+
+                for (var row = 0; row < _dimension - column; ++row)
+                    diagonal.Add(grid[row][column + row]);
+
+                result.Add(diagonal);
+            }
+
+            for (var row = 0; row < _dimension; ++row)
+            {
+                var diagonal = new List<long>(_dimension - row);
+
+                for (var column = 0; column < _dimension - row; ++column)
+                    diagonal.Add(grid[row + column][column]);
+
+                result.Add(diagonal);
+            }
+
+            return result;
+        }
+
         private void FindMaximumProductInList(IReadOnlyList<long> values, ref long result)
         {
             for (var j = 0; j < values.Count - _length + 1; ++j)
@@ -56,31 +91,6 @@ namespace Problems
 
                 result = Math.Max(product, result);
             }
-        }
-
-        private void FindMaximumProductInMainDiagonals(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
-        {
-            for (var row = 0; row < _dimension - _length + 1; ++row)
-                for (var column = 0; column < _dimension - _length + 1 - row; ++column)
-                {
-                    var product = grid[row][column];
-
-                    for (var i = 1; i < _length; ++i)
-                        product *= grid[row + i][column + i];
-
-                    result = Math.Max(product, result);
-                }
-
-            for (var column = 1; column < _dimension - _length + 1; ++column)
-                for (var row = 0; row < _dimension - _length + 1 - column; ++row)
-                {
-                    var product = grid[row][column];
-
-                    for (var i = 1; i < _length; ++i)
-                        product *= grid[row + i][column + i];
-
-                    result = Math.Max(product, result);
-                }
         }
 
         private List<List<long>> RotateGrid()

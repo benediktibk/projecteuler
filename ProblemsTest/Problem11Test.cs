@@ -77,5 +77,13 @@ namespace ProblemsTest
 
             Assert.AreEqual(360, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_FullGrid_CorrectResult()
+        {
+            var problem = new Problem11();
+
+            Assert.AreEqual(70600674, problem.Solve());
+        }
     }
 }
