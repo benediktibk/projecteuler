@@ -45,5 +45,13 @@ namespace ProblemsTest
 
             Assert.AreEqual(184756, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_Dimension20_137846528820()
+        {
+            var problem = new Problem15(20);
+
+            Assert.AreEqual(137846528820, problem.Solve());
+        }
     }
 }
