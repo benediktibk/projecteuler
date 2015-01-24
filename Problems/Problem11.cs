@@ -39,15 +39,23 @@ namespace Problems
         private void FindMaximumProductInRows(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
         {
             for (var row = 0; row < _dimension; ++row)
-                for (var column = 0; column < _dimension - _length + 1; ++column)
-                {
-                    long product = grid[row][column];
+            {
+                var rowValues = grid[row];
+                FindMaximumProductInList(rowValues, ref result);
+            }
+        }
 
-                    for (var i = 1; i < _length; ++i)
-                        product *= grid[row][column + i];
+        private void FindMaximumProductInList(IReadOnlyList<long> values, ref long result)
+        {
+            for (var j = 0; j < values.Count - _length + 1; ++j)
+            {
+                var product = values[j];
 
-                    result = Math.Max(product, result);
-                }
+                for (var i = 1; i < _length; ++i)
+                    product *= values[j + i];
+
+                result = Math.Max(product, result);
+            }
         }
 
         private void FindMaximumProductInMainDiagonals(IReadOnlyList<IReadOnlyList<long>> grid, ref long result)
