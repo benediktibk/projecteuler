@@ -43,6 +43,7 @@
     <Compile Include="FactorizationCache.cs" />
     <Compile Include="IProblem.cs" />
     <Compile Include="IReadOnlyFactorization.cs" />
+    <Compile Include="NumberWordGenerator.cs" />
     <Compile Include="PrimeNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
