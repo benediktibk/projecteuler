@@ -63,7 +63,7 @@ namespace Common
             }
         }
 
-        public BigNumber<T> ShiftLeft(int x)
+        public List<T> ShiftLeftInternal(int x)
         {
             if (x < 0)
                 throw new ArgumentOutOfRangeException("x");
@@ -74,14 +74,14 @@ namespace Common
                 digitsShifted.Add(_digitCalculator.Cast(0));
 
             digitsShifted.AddRange(_digits);
-            return CreateInstance(digitsShifted);
+            return digitsShifted;
         }
 
         public abstract BigNumber<T> CreateZero();
 
         public abstract BigNumber<T> CreateInstance(List<T> digits);
 
-        public static List<T> Add(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
+        protected static List<T> Add(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
         {
             var result = new List<T>();
             var smaller = a.Count < b.Count ? a : b;
@@ -115,7 +115,7 @@ namespace Common
             return result;
         }
 
-        public static List<T> Multiply(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
+        protected static List<T> Multiply(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
         {
             var result = new List<T>();
 

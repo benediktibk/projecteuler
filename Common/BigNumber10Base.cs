@@ -60,5 +60,10 @@ namespace Common
         {
             return new BigNumber10Base(digits);
         }
+
+        public BigNumber10Base ShiftLeft(int n)
+        {
+            return new BigNumber10Base(ShiftLeftInternal(n));
+        }
     }
 }
