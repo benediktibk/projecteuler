@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Common
 {
-    public abstract class BigNumber<T>
+    public abstract class BigNumber<T> : IEnumerable<T>
     {
         private readonly List<T> _digits;
         private readonly IDigitCalculator<T> _digitCalculator; 
@@ -146,6 +147,16 @@ namespace Common
             }
 
             return result;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _digits.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

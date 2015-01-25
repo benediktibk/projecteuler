@@ -20,9 +20,24 @@ namespace Common
             return result;
         }
 
+        public static BigNumberInt32Base Add(BigNumberInt32Base a, BigNumberInt32Base b)
+        {
+            return new BigNumberInt32Base(Add(a.Digits, b.Digits, a.DigitCalculator));
+        }
+
+        public static BigNumberInt32Base Multiply(BigNumberInt32Base a, BigNumberInt32Base b)
+        {
+            return new BigNumberInt32Base(Multiply(a.Digits, b.Digits, a.DigitCalculator));
+        }
+
         public override BigNumber<ulong> CreateZero()
         {
             return new BigNumberInt32Base();
+        }
+
+        public BigNumberInt32Base ShiftLeft(int n)
+        {
+            return new BigNumberInt32Base(ShiftLeftInternal(n));
         }
     }
 }
