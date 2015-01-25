@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 
 namespace Problems
@@ -14,13 +15,37 @@ namespace Problems
 
         public long Solve()
         {
-            return 0;
+            var divisorSums = new Dictionary<long, long>();
+
+            for (var i = 1; i < 10000; ++i)
+            {
+                var divisorSum = CalculateDivisorSum(i);
+                divisorSums[i] = divisorSum;
+            }
+
+            long result = 0;
+
+            foreach (var divisorSum in divisorSums.Where(divisorSum => divisorSum.Key != divisorSum.Value))
+            {
+                var aOne = divisorSum.Key;
+                var bOne = divisorSum.Value;
+                long aTwo;
+
+                if (!divisorSums.TryGetValue(bOne, out aTwo))
+                    continue;
+
+                if (aTwo == aOne)
+                    result++;
+            }
+
+            return result;
         }
 
         public long CalculateDivisorSum(int value)
         {
             var factorization = _factorizationCache.Factorize(value);
-            return 1 + factorization.Sum(x => x.Key*x.Value);
+            var divisors = factorization.CalculateAllPossibleDivisors();
+            return divisors.Sum(x => x);
         }
     }
 }
