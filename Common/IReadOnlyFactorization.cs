@@ -7,6 +7,9 @@ namespace Common
         long this[long factor] { get; }
         long FactorCount { get; }
         long TotalFactorCount { get; }
+        long CountOfPossibleDivisors { get; }
+
         long CalculateProduct();
+        List<long> CalculateAllPossibleDivisors();
     }
 }
