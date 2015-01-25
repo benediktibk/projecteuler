@@ -42,6 +42,11 @@ namespace Common
             get { return _digits.Count; }
         }
 
+        public T DigitBase
+        {
+            get { return _digitCalculator.DigitBase; }
+        }
+
         public T this[int digit]
         {
             get
@@ -53,7 +58,25 @@ namespace Common
             }
         }
 
-        public BigNumber<T> Add(BigNumber<T> a)
+        public BigNumber<T> ShiftLeft(int x)
+        {
+            if (x < 0)
+                throw new ArgumentOutOfRangeException("x");
+
+            var digitsShifted = new List<T>(_digits.Count + x);
+
+            for (var i = 0; i < x; ++i)
+                digitsShifted.Add(_digitCalculator.Cast(0));
+
+            digitsShifted.AddRange(_digits);
+            return CreateInstance(digitsShifted);
+        }
+
+        public abstract BigNumber<T> CreateZero();
+
+        public abstract BigNumber<T> CreateInstance(List<T> digits);
+
+        protected BigNumber<T> Add(BigNumber<T> a)
         {
             var result = CreateZero();
             var smaller = a.DigitCount < DigitCount ? a : this;
@@ -87,7 +110,7 @@ namespace Common
             return result;
         }
 
-        public BigNumber<T> Multiply(BigNumber<T> a)
+        protected BigNumber<T> Multiply(BigNumber<T> a)
         {
             var result = CreateZero();
 
@@ -122,24 +145,6 @@ namespace Common
 
             return result;
         }
-
-        public BigNumber<T> ShiftLeft(int x)
-        {
-            if (x < 0)
-                throw new ArgumentOutOfRangeException("x");
-
-            var digitsShifted = new List<T>(_digits.Count + x);
-
-            for (var i = 0; i < x; ++i)
-                digitsShifted.Add(_digitCalculator.Cast(0));
-
-            digitsShifted.AddRange(_digits);
-            return CreateInstance(digitsShifted);
-        }
-
-        public abstract BigNumber<T> CreateZero();
-
-        public abstract BigNumber<T> CreateInstance(List<T> digits); 
 
         private void AddDigit(T digit)
         {

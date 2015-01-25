@@ -11,6 +11,11 @@ namespace Common
             _base = baseValue;
         }
 
+        public uint DigitBase
+        {
+            get { return _base; }
+        }
+
         public uint CalculateDigit(uint value, uint carry)
         {
             return value - carry * _base;

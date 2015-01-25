@@ -28,7 +28,7 @@ namespace Problems
         public long Solve()
         {
             var summands = ParseString();
-            BigNumber<uint> sum = summands[0];
+            var sum = summands[0];
 
             for (var i = 1; i < _numberCount; ++i)
                 sum = sum.Add(summands[i]);

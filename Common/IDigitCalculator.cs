@@ -2,6 +2,8 @@
 {
     public interface IDigitCalculator<T>
     {
+        T DigitBase { get; }
+
         T CalculateDigit(T value, T carry);
         T CalculateCarry(T value);
         T Cast(ulong value);

@@ -9,6 +9,11 @@
             _baseInShifts = 32;
         }
 
+        public ulong DigitBase
+        {
+            get { return (((ulong) 1) << _baseInShifts); }
+        }
+
         public ulong CalculateDigit(ulong value, ulong carry)
         {
             return value - (carry << _baseInShifts);
@@ -46,7 +51,7 @@
 
         public bool IsValidDigit(ulong a)
         {
-            return a < (((ulong)1) << _baseInShifts);
+            return a < DigitBase;
         }
     }
 }
