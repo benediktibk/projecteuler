@@ -38,5 +38,15 @@
         {
             return a + b;
         }
+
+        public uint CalculateProduct(uint a, uint b, uint carry)
+        {
+            return a*b + carry;
+        }
+
+        public bool IsValidDigit(uint a)
+        {
+            return a < _base;
+        }
     }
 }

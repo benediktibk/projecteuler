@@ -51,14 +51,14 @@ namespace Problems
 
             for (var i = 0; i < _numberCount; ++i)
             {
-                var digits = new List<int>(_digitCount);
+                var digits = new List<uint>(_digitCount);
                 var stringStart = (_digitCount + 1) * i;
                 var stringEnd = (_digitCount + 1) * i + _digitCount - 1;
 
                 for (var position = stringEnd; position >= stringStart; --position)
                 {
                     var character = _summandsString[position];
-                    digits.Add((int)Char.GetNumericValue(character));
+                    digits.Add((uint)Char.GetNumericValue(character));
                 }
 
                 summands.Add(new BigNumber10Base(digits));

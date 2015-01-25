@@ -65,5 +65,19 @@ namespace CommonTest
             Assert.AreEqual((uint)7, result[2]);
             Assert.AreEqual((uint)1, result[3]);
         }
+
+        [TestMethod]
+        public void ShiftLeft_123By2_Digits12300()
+        {
+            var number = new BigNumber10Base(123);
+
+            var result = number.ShiftLeft(2);
+            Assert.AreEqual(5, result.DigitCount);
+            Assert.AreEqual((uint)0, result[0]);
+            Assert.AreEqual((uint)0, result[1]);
+            Assert.AreEqual((uint)3, result[2]);
+            Assert.AreEqual((uint)2, result[3]);
+            Assert.AreEqual((uint)1, result[4]);
+        }
     }
 }
