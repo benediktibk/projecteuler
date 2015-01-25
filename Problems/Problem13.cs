@@ -28,86 +28,42 @@ namespace Problems
         public long Solve()
         {
             var summands = ParseString();
-            var sum = summands[0];
+            BigNumber<uint> sum = summands[0];
 
             for (var i = 1; i < _numberCount; ++i)
-                sum = Add(sum, summands[i]);
+                sum = sum.Add(summands[i]);
 
             long result = 0;
             long shifter = 1;
 
             for (var i = 0; i < 10; ++i, shifter *= 10)
             {
-                var digit = sum[sum.Count - 10 + i];
+                var digit = sum[sum.DigitCount - 10 + i];
                 result += digit*shifter;
             }
 
             return result;
         }
 
-        public static List<int> Add(List<int> a, List<int> b)
+        private List<BigNumber10Base> ParseString()
         {
-            List<int> shorter;
-            List<int> longer;
-
-            if (a.Count < b.Count)
-            {
-                shorter = a;
-                longer = b;
-            }
-            else
-            {
-                shorter = b;
-                longer = a;
-            }
-
-            var result = new List<int>(longer.Count);
-            var carry = 0;
-
-            for (var i = 0; i < shorter.Count; ++i)
-            {
-                var sum = carry + shorter[i] + longer[i];
-                var digit = sum - (sum / 10) * 10;
-                carry = (sum - digit)/10;
-                result.Add(digit);
-            }
-
-            for (var i = shorter.Count; i < longer.Count; ++i)
-            {
-                var sum = carry + longer[i];
-                var digit = sum - (sum / 10) * 10;
-                carry = (sum - digit) / 10;
-                result.Add(digit);
-            }
-
-            while(carry > 0)
-            {
-                var digit = carry - (carry / 10) * 10;
-                carry = (carry - digit)/10;
-                result.Add(digit);
-            }
-
-            return result;
-        }
-
-        private List<List<int>> ParseString()
-        {
-            var summands = new List<List<int>>(_numberCount);
+            var summands = new List<BigNumber10Base>(_numberCount);
 
             for (var i = 0; i < _numberCount; ++i)
             {
-                var summand = new List<int>(_digitCount);
+                var digits = new List<int>(_digitCount);
                 var stringStart = (_digitCount + 1) * i;
                 var stringEnd = (_digitCount + 1) * i + _digitCount - 1;
 
                 for (var position = stringEnd; position >= stringStart; --position)
                 {
                     var character = _summandsString[position];
-                    summand.Add((int)Char.GetNumericValue(character));
+                    digits.Add((int)Char.GetNumericValue(character));
                 }
 
-                summands.Add(summand);
+                summands.Add(new BigNumber10Base(digits));
             }
+
             return summands;
         }
     }

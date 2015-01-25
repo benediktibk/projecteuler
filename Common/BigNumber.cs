@@ -79,7 +79,7 @@ namespace Common
 
         public abstract BigNumber<T> CreateZero();
 
-        private void AddDigit(T digit)
+        protected void AddDigit(T digit)
         {
             _digits.Add(digit);
         }
