@@ -83,6 +83,9 @@ namespace ProjectEuler
                 case 18:
                     problem = new Problem18(Problem18.GetTriangleForProblem18());
                     break;
+                case 67:
+                    problem = new Problem18(Problem18.GetTriangleForProblem67());
+                    break;
                 default:
                     Console.WriteLine("not yet implemented");
                     Console.ReadKey();

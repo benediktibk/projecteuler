@@ -21,5 +21,13 @@ namespace ProblemsTest
 
             Assert.AreEqual(1074, problem.Solve());
         }
+
+        [TestMethod]
+        public void Solve_Problem67Triangle_7273()
+        {
+            var problem = new Problem18(Problem18.GetTriangleForProblem67());
+
+            Assert.AreEqual(7273, problem.Solve());
+        }
     }
 }

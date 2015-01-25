@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.IO;
+using System.Reflection;
 using Common;
 
 namespace Problems
@@ -36,19 +37,32 @@ namespace Problems
             return "3\n7 4\n2 4 6\n8 5 9 3";
         }
 
-        public long Solve()
+        public static string GetTriangleForProblem67()
         {
-            return FindMaximumSum(0, 0);
+            var assembly = Assembly.GetExecutingAssembly(); ;
+            var stream = assembly.GetManifestResourceStream("Problems.p067_triangle.txt");
+            var streamReader = new StreamReader(stream);
+            return streamReader.ReadToEnd();
         }
 
-        private int FindMaximumSum(int row, int column)
+        public long Solve()
         {
-            if (row == _numberTriangle.Count)
-                return 0;
+            var currentLine = new List<int>(_numberTriangle.Last());
 
-            var currentValue = _numberTriangle[row][column];
-            var sumBelow = Math.Max(FindMaximumSum(row + 1, column), FindMaximumSum(row + 1, column + 1));
-            return currentValue + sumBelow;
+            for (var i = _numberTriangle.Count - 2; i >= 0; --i)
+            {
+                var nextLine = new List<int>(_numberTriangle[i]);
+
+                for (var j = 0; j < nextLine.Count; ++j)
+                {
+                    var biggerValue = Math.Max(currentLine[j], currentLine[j + 1]);
+                    nextLine[j] += biggerValue;
+                }
+
+                currentLine = nextLine;
+            }
+
+            return currentLine.First();
         }
     }
 }
