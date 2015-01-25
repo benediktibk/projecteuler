@@ -54,6 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FactorizationCacheTest.cs" />
     <Compile Include="NumberWordGeneratorTest.cs" />
+    <Compile Include="BigNumber10BaseTest.cs" />
+    <Compile Include="BigNumberInt16BaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
