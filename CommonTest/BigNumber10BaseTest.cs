@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CommonTest
@@ -25,7 +26,7 @@ namespace CommonTest
             var a = new BigNumber10Base(12345);
             var b = new BigNumber10Base(789);
 
-            var result = a.Add(b);
+            var result = BigNumber10Base.Add(a, b);
 
             Assert.AreEqual(5, result.DigitCount);
             Assert.AreEqual((uint)4, result[0]);
@@ -41,7 +42,7 @@ namespace CommonTest
             var a = new BigNumber10Base(12345);
             var b = new BigNumber10Base(789);
 
-            var result = b.Add(a);
+            var result = BigNumber10Base.Add(a, b);
 
             Assert.AreEqual(5, result.DigitCount);
             Assert.AreEqual((uint)4, result[0]);
@@ -57,7 +58,7 @@ namespace CommonTest
             var a = new BigNumber10Base(999);
             var b = new BigNumber10Base(789);
 
-            var result = a.Add(b);
+            var result = BigNumber10Base.Add(a, b);
 
             Assert.AreEqual(4, result.DigitCount);
             Assert.AreEqual((uint)8, result[0]);
@@ -87,7 +88,7 @@ namespace CommonTest
             var a = new BigNumber10Base(123);
             var b = new BigNumber10Base(9);
 
-            var result = a.Multiply(b);
+            var result = BigNumber10Base.Multiply(a, b);
 
             Assert.AreEqual(4, result.DigitCount);
             Assert.AreEqual((uint)7, result[0]);
@@ -102,7 +103,7 @@ namespace CommonTest
             var a = new BigNumber10Base(123);
             var b = new BigNumber10Base(4366);
 
-            var result = a.Multiply(b);
+            var result = BigNumber10Base.Multiply(a, b);
 
             Assert.AreEqual(6, result.DigitCount);
             Assert.AreEqual((uint)8, result[0]);
@@ -111,6 +112,21 @@ namespace CommonTest
             Assert.AreEqual((uint)7, result[3]);
             Assert.AreEqual((uint)3, result[4]);
             Assert.AreEqual((uint)5, result[5]);
+        }
+
+        [TestMethod]
+        public void Convert_BigNumberInt32Base_CorrectDigits()
+        {
+            var source = new BigNumberInt32Base(2 ^ 60 - 1);
+
+            var result = BigNumber10Base.Convert(source);
+
+            var digitsShouldBe = new List<ulong> { 1152921504606846975 };
+            digitsShouldBe.Reverse();
+            Assert.AreEqual(digitsShouldBe.Count, result.DigitCount);
+
+            for (var i = 0; i < digitsShouldBe.Count; ++i)
+                Assert.AreEqual(digitsShouldBe[i], result[i]);
         }
     }
 }

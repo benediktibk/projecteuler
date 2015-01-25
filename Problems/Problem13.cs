@@ -31,7 +31,7 @@ namespace Problems
             var sum = summands[0];
 
             for (var i = 1; i < _numberCount; ++i)
-                sum = sum.Add(summands[i]);
+                sum = BigNumber10Base.Add(sum, summands[i]);
 
             long result = 0;
             long shifter = 1;

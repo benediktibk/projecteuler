@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Common
 {
@@ -17,28 +18,37 @@ namespace Common
         public static BigNumber10Base Convert(BigNumberInt32Base x)
         {
             var result = new BigNumber10Base();
-            var shifter = new BigNumber10Base(x.DigitCalculator.DigitBase);
+            var digitBase = x.DigitCalculator.DigitBase;
+            var shifterValuePartOne = digitBase/2;
+            const ulong shifterValuePartTwo = 2;
+
+            if (shifterValuePartOne*shifterValuePartTwo != digitBase)
+                throw new Exception();
+
+            var shifterPartOne = new BigNumber10Base(shifterValuePartOne);
+            var shifterPartTwo = new BigNumber10Base(shifterValuePartTwo);
+            var shifter = Multiply(shifterPartOne, shifterPartTwo);
 
             for (var i = x.DigitCount - 1; i >= 0; --i)
             {
                 var digit = x[i];
                 var summand = new BigNumber10Base(digit);
-                result = result.Add(summand);
+                result = Add(result, summand);
                 if (i > 0)
-                    result = result.Multiply(shifter);
+                    result = Multiply(result, shifter);
             }
 
             return result;
         }
 
-        public BigNumber10Base Add(BigNumber10Base x)
+        public static BigNumber10Base Add(BigNumber10Base a, BigNumber10Base b)
         {
-            return new BigNumber10Base(Add(Digits, x.Digits, DigitCalculator));
+            return new BigNumber10Base(Add(a.Digits, b.Digits, a.DigitCalculator));
         }
 
-        public BigNumber10Base Multiply(BigNumber10Base x)
+        public static BigNumber10Base Multiply(BigNumber10Base a, BigNumber10Base b)
         {
-            return new BigNumber10Base(Multiply(Digits, x.Digits, DigitCalculator));
+            return new BigNumber10Base(Multiply(a.Digits, b.Digits, a.DigitCalculator));
         }
 
         public override BigNumber<uint> CreateZero()
