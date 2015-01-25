@@ -72,12 +72,45 @@ namespace CommonTest
             var number = new BigNumber10Base(123);
 
             var result = number.ShiftLeft(2);
+
             Assert.AreEqual(5, result.DigitCount);
             Assert.AreEqual((uint)0, result[0]);
             Assert.AreEqual((uint)0, result[1]);
             Assert.AreEqual((uint)3, result[2]);
             Assert.AreEqual((uint)2, result[3]);
             Assert.AreEqual((uint)1, result[4]);
+        }
+
+        [TestMethod]
+        public void Multiply_123And9_Digits1107()
+        {
+            var a = new BigNumber10Base(123);
+            var b = new BigNumber10Base(9);
+
+            var result = a.Multiply(b);
+
+            Assert.AreEqual(4, result.DigitCount);
+            Assert.AreEqual((uint)7, result[0]);
+            Assert.AreEqual((uint)0, result[1]);
+            Assert.AreEqual((uint)1, result[2]);
+            Assert.AreEqual((uint)1, result[3]);
+        }
+
+        [TestMethod]
+        public void Multiply_123And4366_Digits537018()
+        {
+            var a = new BigNumber10Base(123);
+            var b = new BigNumber10Base(4366);
+
+            var result = a.Multiply(b);
+
+            Assert.AreEqual(6, result.DigitCount);
+            Assert.AreEqual((uint)8, result[0]);
+            Assert.AreEqual((uint)1, result[1]);
+            Assert.AreEqual((uint)0, result[2]);
+            Assert.AreEqual((uint)7, result[3]);
+            Assert.AreEqual((uint)3, result[4]);
+            Assert.AreEqual((uint)5, result[5]);
         }
     }
 }

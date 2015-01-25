@@ -97,7 +97,7 @@ namespace Common
                 var summandDigits = new List<T>(DigitCount + i);
                 var carry = _digitCalculator.Cast(0);
 
-                for (var j = 0; j < i; ++i)
+                for (var j = 0; j < i; ++j)
                     summandDigits.Add(carry);
 
                 for (var j = 0; j < DigitCount; ++j)
@@ -106,6 +106,14 @@ namespace Common
                     carry = _digitCalculator.CalculateCarry(value);
                     var digit = _digitCalculator.CalculateDigit(value, carry);
                     summandDigits.Add(digit);
+                }
+
+                while (_digitCalculator.IsDigitGreaterThanZero(carry))
+                {
+                    var newCarry = _digitCalculator.CalculateCarry(carry);
+                    var digit = _digitCalculator.CalculateDigit(carry, newCarry);
+                    summandDigits.Add(digit);
+                    carry = newCarry;
                 }
 
                 var summand = CreateInstance(summandDigits);
