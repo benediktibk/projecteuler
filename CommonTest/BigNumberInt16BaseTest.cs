@@ -15,6 +15,7 @@ namespace CommonTest
 
             const uint secondDigit = value >> 16;
             const uint firstDigit = value - (secondDigit << 16);
+            Assert.AreEqual(2, number.DigitCount);
             Assert.AreEqual(firstDigit, number[0]);
             Assert.AreEqual(secondDigit, number[1]);
         }
