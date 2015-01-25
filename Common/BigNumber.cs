@@ -15,7 +15,7 @@ namespace Common
             _digitCalculator = digitCalculator;
         }
 
-        protected BigNumber(uint value, IDigitCalculator<T> digitCalculator) : this(digitCalculator)
+        protected BigNumber(ulong value, IDigitCalculator<T> digitCalculator) : this(digitCalculator)
         {
             var carry = _digitCalculator.Cast(value);
 

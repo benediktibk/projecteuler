@@ -1,4 +1,6 @@
-﻿namespace Common
+﻿using System;
+
+namespace Common
 {
     public class DigitCalculatorGenericBase : IDigitCalculator<uint>
     {
@@ -19,9 +21,12 @@
             return value / _base;
         }
 
-        public uint Cast(uint value)
+        public uint Cast(ulong value)
         {
-            return value;
+            if (value > UInt32.MaxValue)
+                throw new ArgumentOutOfRangeException("value");
+
+            return (uint)value;
         }
 
         public bool IsDigitGreaterThanZero(uint value)

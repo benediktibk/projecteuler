@@ -1,12 +1,12 @@
 ﻿namespace Common
 {
-    public class DigitCalculatorInt20Base : IDigitCalculator<ulong>
+    public class DigitCalculatorInt32Base : IDigitCalculator<ulong>
     {
         private readonly int _baseInShifts;
 
-        public DigitCalculatorInt20Base()
+        public DigitCalculatorInt32Base()
         {
-            _baseInShifts = 20;
+            _baseInShifts = 32;
         }
 
         public ulong CalculateDigit(ulong value, ulong carry)
@@ -19,7 +19,7 @@
             return value >> _baseInShifts;
         }
 
-        public ulong Cast(uint value)
+        public ulong Cast(ulong value)
         {
             return value;
         }
@@ -46,7 +46,7 @@
 
         public bool IsValidDigit(ulong a)
         {
-            return a < (ulong)(1 << _baseInShifts);
+            return a < (((ulong)1) << _baseInShifts);
         }
     }
 }

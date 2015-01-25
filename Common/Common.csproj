@@ -40,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigNumber.cs" />
-    <Compile Include="BigNumberInt20Base.cs" />
+    <Compile Include="BigNumberInt32Base.cs" />
     <Compile Include="BigNumber10Base.cs" />
     <Compile Include="DigitCalculatorGenericBase.cs" />
-    <Compile Include="DigitCalculatorInt20Base.cs" />
+    <Compile Include="DigitCalculatorInt32Base.cs" />
     <Compile Include="Factorization.cs" />
     <Compile Include="FactorizationCache.cs" />
     <Compile Include="IDigitCalculator.cs" />

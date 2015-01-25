@@ -2,16 +2,16 @@
 
 namespace Common
 {
-    public class BigNumberInt20Base : BigNumber<ulong>
+    public class BigNumberInt32Base : BigNumber<ulong>
     {
-        public BigNumberInt20Base() : base(new DigitCalculatorInt20Base())
+        public BigNumberInt32Base() : base(new DigitCalculatorInt32Base())
         { }
 
-        public BigNumberInt20Base(uint value) : base(value, new DigitCalculatorInt20Base())
+        public BigNumberInt32Base(ulong value) : base(value, new DigitCalculatorInt32Base())
         { }
 
-        public BigNumberInt20Base(List<ulong> digits)
-            : base(digits, new DigitCalculatorInt20Base())
+        public BigNumberInt32Base(List<ulong> digits)
+            : base(digits, new DigitCalculatorInt32Base())
         { }
 
         public List<int> ConvertTo10Base()
@@ -22,12 +22,12 @@ namespace Common
 
         public override BigNumber<ulong> CreateZero()
         {
-            return new BigNumberInt20Base();
+            return new BigNumberInt32Base();
         }
 
         public override BigNumber<ulong> CreateInstance(List<ulong> digits)
         {
-            return new BigNumberInt20Base(digits);
+            return new BigNumberInt32Base(digits);
         }
     }
 }
