@@ -24,10 +24,5 @@ namespace Common
         {
             return new BigNumberInt32Base();
         }
-
-        public override BigNumber<ulong> CreateInstance(List<ulong> digits)
-        {
-            return new BigNumberInt32Base(digits);
-        }
     }
 }

@@ -79,8 +79,6 @@ namespace Common
 
         public abstract BigNumber<T> CreateZero();
 
-        public abstract BigNumber<T> CreateInstance(List<T> digits);
-
         protected static List<T> Add(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
         {
             var result = new List<T>();
