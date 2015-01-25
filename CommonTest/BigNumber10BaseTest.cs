@@ -117,16 +117,43 @@ namespace CommonTest
         [TestMethod]
         public void Convert_BigNumberInt32Base_CorrectDigits()
         {
-            var source = new BigNumberInt32Base(2 ^ 60 - 1);
+            var source = new BigNumberInt32Base((((ulong)1) << 60) - 1);
 
             var result = BigNumber10Base.Convert(source);
 
-            var digitsShouldBe = new List<ulong> { 1152921504606846975 };
+            var digitsShouldBe = new List<ulong> { 1, 1, 5, 2, 9, 2, 1, 5, 0, 4, 6, 0, 6, 8, 4, 6, 9, 7, 5 };
             digitsShouldBe.Reverse();
             Assert.AreEqual(digitsShouldBe.Count, result.DigitCount);
 
             for (var i = 0; i < digitsShouldBe.Count; ++i)
                 Assert.AreEqual(digitsShouldBe[i], result[i]);
+        }
+
+        [TestMethod]
+        public void Convert_23AsBigNumberInt32Base_CorrectDigits()
+        {
+            var source = new BigNumberInt32Base(23);
+
+            var result = BigNumber10Base.Convert(source);
+
+            Assert.AreEqual(2, result.DigitCount);
+            Assert.AreEqual((uint)3, result[0]);
+            Assert.AreEqual((uint)2, result[1]);
+        }
+
+        [TestMethod]
+        public void Convert_23456AsBigNumberInt32Base_CorrectDigits()
+        {
+            var source = new BigNumberInt32Base(23456);
+
+            var result = BigNumber10Base.Convert(source);
+
+            Assert.AreEqual(5, result.DigitCount);
+            Assert.AreEqual((uint)6, result[0]);
+            Assert.AreEqual((uint)5, result[1]);
+            Assert.AreEqual((uint)4, result[2]);
+            Assert.AreEqual((uint)3, result[3]);
+            Assert.AreEqual((uint)2, result[4]);
         }
     }
 }
