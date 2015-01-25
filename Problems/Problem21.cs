@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common;
 
@@ -23,7 +24,7 @@ namespace Problems
                 divisorSums[i] = divisorSum;
             }
 
-            long result = 0;
+            var amicable = new HashSet<long>();
 
             foreach (var divisorSum in divisorSums.Where(divisorSum => divisorSum.Key != divisorSum.Value))
             {
@@ -34,11 +35,15 @@ namespace Problems
                 if (!divisorSums.TryGetValue(bOne, out aTwo))
                     continue;
 
-                if (aTwo == aOne)
-                    result++;
+                if (aTwo != aOne) 
+                    continue;
+
+                amicable.Add(aOne);
+                amicable.Add(bOne);
+                Console.WriteLine("d(" + aOne + ")=" + bOne + ", d(" + bOne + ")=" + aTwo);
             }
 
-            return result;
+            return amicable.Sum();
         }
 
         public long CalculateDivisorSum(int value)

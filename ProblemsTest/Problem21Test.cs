@@ -26,5 +26,11 @@ namespace ProblemsTest
         {
             Assert.AreEqual(220, _problem.CalculateDivisorSum(284));
         }
+
+        [TestMethod]
+        public void Solve_Empty_31626()
+        {
+            Assert.AreEqual(31626, _problem.Solve());
+        }
     }
 }
