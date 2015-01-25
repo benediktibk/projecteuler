@@ -47,7 +47,7 @@ namespace Common
             get { return _digits.Count; }
         }
 
-        public IDigitCalculator<T> DigitalCalculator
+        public IDigitCalculator<T> DigitCalculator
         {
             get { return _digitCalculator; }
         }
@@ -115,39 +115,39 @@ namespace Common
             return result;
         }
 
-        protected BigNumber<T> Multiply(BigNumber<T> a)
+        public static List<T> Multiply(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
         {
             var result = new List<T>();
 
-            for (var i = 0; i < a.DigitCount; ++i)
+            for (var i = 0; i < a.Count; ++i)
             {
                 var currentDigit = a[i];
-                var summandDigits = new List<T>(DigitCount + i);
-                var carry = _digitCalculator.Cast(0);
+                var summandDigits = new List<T>(b.Count + i);
+                var carry = digitCalculator.Cast(0);
 
                 for (var j = 0; j < i; ++j)
                     summandDigits.Add(carry);
 
-                for (var j = 0; j < DigitCount; ++j)
+                for (var j = 0; j < b.Count; ++j)
                 {
-                    var value = _digitCalculator.CalculateProduct(_digits[j], currentDigit, carry);
-                    carry = _digitCalculator.CalculateCarry(value);
-                    var digit = _digitCalculator.CalculateDigit(value, carry);
+                    var value = digitCalculator.CalculateProduct(b[j], currentDigit, carry);
+                    carry = digitCalculator.CalculateCarry(value);
+                    var digit = digitCalculator.CalculateDigit(value, carry);
                     summandDigits.Add(digit);
                 }
 
-                while (_digitCalculator.IsDigitGreaterThanZero(carry))
+                while (digitCalculator.IsDigitGreaterThanZero(carry))
                 {
-                    var newCarry = _digitCalculator.CalculateCarry(carry);
-                    var digit = _digitCalculator.CalculateDigit(carry, newCarry);
+                    var newCarry = digitCalculator.CalculateCarry(carry);
+                    var digit = digitCalculator.CalculateDigit(carry, newCarry);
                     summandDigits.Add(digit);
                     carry = newCarry;
                 }
 
-                result = Add(result, summandDigits, DigitalCalculator);
+                result = Add(result, summandDigits, digitCalculator);
             }
 
-            return CreateInstance(result);
+            return result;
         }
     }
 }
