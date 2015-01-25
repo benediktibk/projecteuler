@@ -23,18 +23,23 @@ namespace Common
             {
                 var newCarry = _digitCalculator.CalculateCarry(carry);
                 var digit = _digitCalculator.CalculateDigit(carry, newCarry);
-                AddDigit(digit);
+                _digits.Add(digit);
                 carry = newCarry;
             }
         }
 
-        protected BigNumber(List<T> digits, IDigitCalculator<T> digitCalculator)
+        protected BigNumber(IReadOnlyList<T> digits, IDigitCalculator<T> digitCalculator)
         {
             if (digits.Any(x => !digitCalculator.IsValidDigit(x)))
                 throw new ArgumentOutOfRangeException("digits");
 
-            _digits = digits;
+            _digits = new List<T>(digits);
             _digitCalculator = digitCalculator;
+        }
+
+        public IReadOnlyList<T> Digits
+        {
+            get { return _digits; }
         }
 
         public int DigitCount
@@ -42,9 +47,9 @@ namespace Common
             get { return _digits.Count; }
         }
 
-        public T DigitBase
+        public IDigitCalculator<T> DigitalCalculator
         {
-            get { return _digitCalculator.DigitBase; }
+            get { return _digitCalculator; }
         }
 
         public T this[int digit]
@@ -76,34 +81,34 @@ namespace Common
 
         public abstract BigNumber<T> CreateInstance(List<T> digits);
 
-        protected BigNumber<T> Add(BigNumber<T> a)
+        public static List<T> Add(IReadOnlyList<T> a, IReadOnlyList<T> b, IDigitCalculator<T> digitCalculator)
         {
-            var result = CreateZero();
-            var smaller = a.DigitCount < DigitCount ? a : this;
-            var bigger = a.DigitCount < DigitCount ? this : a;
-            var carry = _digitCalculator.Cast(0);
+            var result = new List<T>();
+            var smaller = a.Count < b.Count ? a : b;
+            var bigger = a.Count < b.Count ? b : a;
+            var carry = digitCalculator.Cast(0);
 
-            for (var i = 0; i < smaller.DigitCount; ++i)
+            for (var i = 0; i < smaller.Count; ++i)
             {
-                var value = _digitCalculator.CalculateSum(smaller[i], bigger[i], carry);
-                carry = _digitCalculator.CalculateCarry(value);
-                var digit = _digitCalculator.CalculateDigit(value, carry);
-                result.AddDigit(digit);
+                var value = digitCalculator.CalculateSum(smaller[i], bigger[i], carry);
+                carry = digitCalculator.CalculateCarry(value);
+                var digit = digitCalculator.CalculateDigit(value, carry);
+                result.Add(digit);
             }
 
-            for (var i = smaller.DigitCount; i < bigger.DigitCount; ++i)
+            for (var i = smaller.Count; i < bigger.Count; ++i)
             {
-                var value = _digitCalculator.CalculateSum(bigger[i], carry);
-                carry = _digitCalculator.CalculateCarry(value);
-                var digit = _digitCalculator.CalculateDigit(value, carry);
-                result.AddDigit(digit);
+                var value = digitCalculator.CalculateSum(bigger[i], carry);
+                carry = digitCalculator.CalculateCarry(value);
+                var digit = digitCalculator.CalculateDigit(value, carry);
+                result.Add(digit);
             }
 
-            while (_digitCalculator.IsDigitGreaterThanZero(carry))
+            while (digitCalculator.IsDigitGreaterThanZero(carry))
             {
-                var newCarry = _digitCalculator.CalculateCarry(carry);
-                var digit = _digitCalculator.CalculateDigit(carry, newCarry);
-                result.AddDigit(digit);
+                var newCarry = digitCalculator.CalculateCarry(carry);
+                var digit = digitCalculator.CalculateDigit(carry, newCarry);
+                result.Add(digit);
                 carry = newCarry;
             }
 
@@ -112,7 +117,7 @@ namespace Common
 
         protected BigNumber<T> Multiply(BigNumber<T> a)
         {
-            var result = CreateZero();
+            var result = new List<T>();
 
             for (var i = 0; i < a.DigitCount; ++i)
             {
@@ -139,19 +144,10 @@ namespace Common
                     carry = newCarry;
                 }
 
-                var summand = CreateInstance(summandDigits);
-                result = result.Add(summand);
+                result = Add(result, summandDigits, DigitalCalculator);
             }
 
-            return result;
-        }
-
-        private void AddDigit(T digit)
-        {
-            if (!_digitCalculator.IsValidDigit(digit))
-                throw new ArgumentOutOfRangeException("digit");
-
-            _digits.Add(digit);
+            return CreateInstance(result);
         }
     }
 }

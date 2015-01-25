@@ -10,13 +10,14 @@ namespace Common
         public BigNumber10Base(ulong value) : base(value, new DigitCalculatorGenericBase(10))
         { }
 
-        public BigNumber10Base(List<uint> digits) : base(digits, new DigitCalculatorGenericBase(10))
+        public BigNumber10Base(IReadOnlyList<uint> digits)
+            : base(digits, new DigitCalculatorGenericBase(10))
         { }
 
         public static BigNumber10Base Convert(BigNumberInt32Base x)
         {
             var result = new BigNumber10Base();
-            var shifter = new BigNumber10Base(x.DigitBase);
+            var shifter = new BigNumber10Base(x.DigitalCalculator.DigitBase);
 
             for (var i = x.DigitCount - 1; i >= 0; --i)
             {
@@ -32,7 +33,7 @@ namespace Common
 
         public BigNumber10Base Add(BigNumber10Base x)
         {
-            return base.Add(x) as BigNumber10Base;
+            return new BigNumber10Base(Add(Digits, x.Digits, DigitalCalculator));
         }
 
         public BigNumber10Base Multiply(BigNumber10Base x)

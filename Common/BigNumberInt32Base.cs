@@ -10,7 +10,7 @@ namespace Common
         public BigNumberInt32Base(ulong value) : base(value, new DigitCalculatorInt32Base())
         { }
 
-        public BigNumberInt32Base(List<ulong> digits)
+        public BigNumberInt32Base(IReadOnlyList<ulong> digits)
             : base(digits, new DigitCalculatorInt32Base())
         { }
 
