@@ -53,6 +53,7 @@
     <Compile Include="Problem2.cs" />
     <Compile Include="Problem20.cs" />
     <Compile Include="Problem21.cs" />
+    <Compile Include="Problem22.cs" />
     <Compile Include="Problem3.cs" />
     <Compile Include="Problem4.cs" />
     <Compile Include="Problem5.cs" />
@@ -70,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="p067_triangle.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="p022_names.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
