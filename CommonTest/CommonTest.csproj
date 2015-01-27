@@ -57,6 +57,7 @@
     <Compile Include="BigNumber10BaseTest.cs" />
     <Compile Include="BigNumberInt32BaseTest.cs" />
     <Compile Include="FactorizationTest.cs" />
+    <Compile Include="CombinatorialTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
