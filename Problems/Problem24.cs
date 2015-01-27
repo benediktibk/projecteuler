@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Common;
 
 namespace Problems
@@ -16,12 +19,36 @@ namespace Problems
 
         public long Solve()
         {
-            return 0;
+            var permutations = CreateAllPermutations();
+            permutations.Sort();
+            return permutations[_permutationIndex - 1];
         }
 
         public List<long> CreateAllPermutations()
         {
-            var result = new List<long>();
+            var candidates = new List<long>(_digitCount);
+
+            for (var i = 0; i < _digitCount; ++i)
+                candidates.Add(i);
+
+            return CreateAllPermutations(candidates);
+        }
+
+        public List<long> CreateAllPermutations(List<long> candidates)
+        {
+            if (candidates.Count == 0)
+                return new List<long>{0};
+
+            var result = new List<long>((int)Combinatorial.Factorial(candidates.Count));
+            var shifter = (long) Math.Pow(10, candidates.Count - 1);
+
+            foreach (var candidate in candidates)
+            {
+                var candidatesReduced = candidates.Where(x => x != candidate).ToList();
+                var partialResults = CreateAllPermutations(candidatesReduced);
+                result.AddRange(partialResults.Select(partialResult => candidate*shifter + partialResult));
+            }
+
             return result;
         }
     }

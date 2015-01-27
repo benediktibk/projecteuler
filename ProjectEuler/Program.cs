@@ -92,6 +92,15 @@ namespace ProjectEuler
                 case 21:
                     problem = new Problem21(factorizationCache);
                     break;
+                case 22:
+                    problem = new Problem22();
+                    break;
+                case 23:
+                    problem = new Problem23(factorizationCache);
+                    break;
+                case 24:
+                    problem = new Problem24(10, 1000000);
+                    break;
                 case 67:
                     problem = new Problem18(Problem18.GetTriangleForProblem67());
                     break;
