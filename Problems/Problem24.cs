@@ -19,9 +19,38 @@ namespace Problems
 
         public long Solve()
         {
-            var permutations = CreateAllPermutations();
-            permutations.Sort();
-            return permutations[_permutationIndex - 1];
+            var digit = 0;
+            long currentIndex = 1;
+            var permutation = new List<int>(_digitCount);
+            var digitsLeft = new List<int>(_digitCount);
+
+            for (var i = 0; i < _digitCount; ++i)
+                digitsLeft.Add(i);
+
+            while (digitsLeft.Count > 0)
+            {
+                var nextStep = Combinatorial.Factorial(digitsLeft.Count - 1);
+
+                if (currentIndex + nextStep <= _permutationIndex)
+                {
+                    currentIndex += nextStep;
+                    digit++;
+                }
+                else
+                {
+                    permutation.Add(digitsLeft[digit]);
+                    digitsLeft.RemoveAt(digit);
+                    digit = 0;
+                }
+            }
+
+            long result = 0;
+            long shifter = 1;
+
+            for (var i = _digitCount - 1; i >= 0; --i, shifter *= 10)
+                result += permutation[i]*shifter;
+
+            return result;
         }
 
         public List<long> CreateAllPermutations()
