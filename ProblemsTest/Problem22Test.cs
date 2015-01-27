@@ -11,7 +11,7 @@ namespace ProblemsTest
         {
             var problem = new Problem22();
 
-            Assert.AreEqual(-1, problem.Solve());
+            Assert.AreEqual(871198282, problem.Solve());
         }
     }
 }
