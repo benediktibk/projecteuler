@@ -101,6 +101,9 @@ namespace ProjectEuler
                 case 24:
                     problem = new Problem24(10, 1000000);
                     break;
+                case 25:
+                    problem = new Problem25(1000);
+                    break;
                 case 67:
                     problem = new Problem18(Problem18.GetTriangleForProblem67());
                     break;
