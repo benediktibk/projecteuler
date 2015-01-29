@@ -6,11 +6,13 @@ namespace Common
     public class PrimeNumbers
     {
         private readonly List<long> _primeNumbers;
+        private readonly Dictionary<long, bool> _isPrime; 
         private long _currentUpperBorder;
 
         public PrimeNumbers()
         {
             _primeNumbers = new List<long>();
+            _isPrime = new Dictionary<long, bool>();
             _currentUpperBorder = 1;
         }
 
@@ -21,8 +23,14 @@ namespace Common
 
         public bool IsPrime(long value)
         {
-            Extend(value);
-            return _primeNumbers.Contains(value);
+            bool result;
+
+            if (_isPrime.TryGetValue(value, out result))
+                return result;
+
+            result = IsPrimeInternal(value);
+            _isPrime.Add(value, result);
+            return result;
         }
 
         public List<long> UpTo(long limit)
@@ -86,6 +94,12 @@ namespace Common
                 ExtendInternal(_currentUpperBorder + blockSize);
 
             ExtendInternal(limit);
+        }
+
+        private bool IsPrimeInternal(long value)
+        {
+            Extend(value);
+            return _primeNumbers.Contains(value);
         }
 
         private List<long> UpToInternal(long limit)
