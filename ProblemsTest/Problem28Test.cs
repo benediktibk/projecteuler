@@ -31,11 +31,11 @@ namespace ProblemsTest
         }
 
         [TestMethod]
-        public void Solve_Dimension1001_0()
+        public void Solve_Dimension1001_669171001()
         {
             var problem = new Problem28(1001);
 
-            Assert.AreEqual(0, problem.Solve());
+            Assert.AreEqual(669171001, problem.Solve());
         }
     }
 }
