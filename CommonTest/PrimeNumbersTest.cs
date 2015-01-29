@@ -117,5 +117,41 @@ namespace CommonTest
         {
             Assert.IsTrue(_primeNumbers.UpperBorderForNumberOfPrimeNumbers(10000) >= 1229);
         }
+
+        [TestMethod]
+        public void IsPrime_2_True()
+        {
+            Assert.IsTrue(_primeNumbers.IsPrime(2));
+        }
+
+        [TestMethod]
+        public void IsPrime_3_True()
+        {
+            Assert.IsTrue(_primeNumbers.IsPrime(3));
+        }
+
+        [TestMethod]
+        public void IsPrime_5_True()
+        {
+            Assert.IsTrue(_primeNumbers.IsPrime(5));
+        }
+
+        [TestMethod]
+        public void IsPrime_41_True()
+        {
+            Assert.IsTrue(_primeNumbers.IsPrime(41));
+        }
+
+        [TestMethod]
+        public void IsPrime_4_False()
+        {
+            Assert.IsFalse(_primeNumbers.IsPrime(4));
+        }
+
+        [TestMethod]
+        public void IsPrime_45_False()
+        {
+            Assert.IsFalse(_primeNumbers.IsPrime(45));
+        }
     }
 }

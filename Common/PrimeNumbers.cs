@@ -19,6 +19,12 @@ namespace Common
             get { return _primeNumbers.Count; }
         }
 
+        public bool IsPrime(long value)
+        {
+            Extend(value);
+            return _primeNumbers.Contains(value);
+        }
+
         public List<long> UpTo(long limit)
         {
             Extend(limit);
