@@ -3,7 +3,7 @@ using Common;
 
 namespace Problems
 {
-    class Problem27 : IProblem
+    public class Problem27 : IProblem
     {
         private readonly int _limit;
         private readonly PrimeNumbers _primeNumbers;
@@ -18,10 +18,34 @@ namespace Problems
         {
             var bCandidates = _primeNumbers.UpTo(_limit);
             var aCandidates = new List<long>();
+            long resultLength = 0;
+            long result = 0;
 
             for (var i = (-1)*_limit; i <= _limit; ++i)
                 aCandidates.Add(i);
-            return 0;
+
+            foreach (var b in bCandidates)
+            {
+                var bEven = b%2;
+                
+                foreach (var a in aCandidates)
+                {
+                    var aEven = a%2;
+
+                    if (aEven != bEven)
+                        continue;
+
+                    var length = CalculateLengthOfPrimeSequence(a, b);
+
+                    if (length <= resultLength) 
+                        continue;
+
+                    resultLength = length;
+                    result = a*b;
+                }
+            }
+
+            return result;
         }
 
         public long CalculateLengthOfPrimeSequence(long a, long b)

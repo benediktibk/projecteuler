@@ -77,6 +77,7 @@
     <Compile Include="Problem24Test.cs" />
     <Compile Include="Problem25Test.cs" />
     <Compile Include="Problem26Test.cs" />
+    <Compile Include="Problem27Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
